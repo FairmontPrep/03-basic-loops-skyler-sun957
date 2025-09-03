@@ -36,9 +36,16 @@ public class CheckDigit {
      * getCheck returns 2
      */
     public static int getCheck(int num) {
-
-        return 0;
+        int numDigits = getNumberOfDigits(num);
+        int sum = 0;
+        for (int i = 1; i <= numDigits; i++) {
+            int digit = getDigit(num, i);
+            int weight = 8 - i; // first digit ×7, second ×6, etc.
+            sum += digit * weight;
+        }
+        return sum % 10;
     }
+
 
 
     /** COMPLETE THIS METHOD
@@ -53,7 +60,8 @@ public class CheckDigit {
      * isValid(17325) returns false :: 5 is NOT the check digit of 1732
      */
     public static boolean isValid(int numWithCheckDigit) {
-
-        return false;
+        int checkDigit = numWithCheckDigit % 10;
+        int originalNum = numWithCheckDigit / 10;
+        return getCheck(originalNum) == checkDigit;
     }
 }

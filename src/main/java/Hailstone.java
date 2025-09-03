@@ -26,8 +26,16 @@ public class Hailstone {
      * Given the example above the length would be 6.
      */
     public static int hailstoneLength(int n) { 
-        
-        return 0;
+        int length = 1; // count the starting term
+        while (n != 1) {
+            if (n % 2 == 0) {
+                n = n / 2;
+            } else {
+                n = 3 * n + 1;
+            }
+            length++;
+        }
+        return length;
     }
 
     /** COMPLETE THIS METHOD
@@ -39,8 +47,7 @@ public class Hailstone {
      * therfore, the hailstone sequence is considered long.
      */
     public static boolean isLongSeq(int n) { 
-        
-        return false;
+        return hailstoneLength(n) > n;
     }
 
     /** COMPLETE THIS METHOD
@@ -52,7 +59,12 @@ public class Hailstone {
      * NOTE: isLongSeq() is required to work properly for accuate results.
      */
     public static double propLong(int n) {
-        
-        return 0.0;
+        int countLong = 0;
+        for (int i = 1; i <= n; i++) {
+            if (isLongSeq(i)) {
+                countLong++;
+            }
+        }
+        return (double) countLong / n;
     }
 }
